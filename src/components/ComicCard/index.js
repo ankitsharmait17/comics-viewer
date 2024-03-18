@@ -3,22 +3,22 @@ import { Card, CardImg, CardBody, CardTitle, CardSubtitle, UncontrolledTooltip }
 import PropTypes from 'prop-types';
 import { truncateText } from '../../common/utils';
 
-const ComicCard = ({ show }) => {
+const ComicCard = ({ comic }) => {
     return (
         <Card style={{ color: 'white' }}>
             <CardImg
                 top
-                src={`${show?.thumbnail?.path}.${show?.thumbnail?.extension}`}
+                src={`${comic?.thumbnail?.path}.${comic?.thumbnail?.extension}`}
                 alt='Card image cap'
                 style={{ height: '300px' }}
             />
 
             <CardBody>
-                <CardTitle id={`comic-card-title-${show.id}`}>{truncateText(show.title)}</CardTitle>
-                <CardSubtitle>#{show.issueNumber}</CardSubtitle>
-                {show.title.length > 30 && (
-                    <UncontrolledTooltip placement='right' target={`comic-card-title-${show.id}`}>
-                        {show.title}
+                <CardTitle id={`comic-card-title-${comic.id}`}>{truncateText(comic.title)}</CardTitle>
+                <CardSubtitle>#{comic.issueNumber}</CardSubtitle>
+                {comic.title.length > 30 && (
+                    <UncontrolledTooltip placement='right' target={`comic-card-title-${comic.id}`}>
+                        {comic.title}
                     </UncontrolledTooltip>
                 )}
             </CardBody>
@@ -27,7 +27,7 @@ const ComicCard = ({ show }) => {
 };
 
 ComicCard.propTypes = {
-    show: PropTypes.object.isRequired,
+    comic: PropTypes.object.isRequired,
 };
 
 export default ComicCard;

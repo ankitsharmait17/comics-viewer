@@ -4,6 +4,7 @@ import ComicGrid from '../ComicGrid';
 import { comicsServiceManager } from '../../services';
 import { useQuery, keepPreviousData } from 'react-query';
 import Spinner from '../Spinner';
+import CharactersList from '../CharactersList';
 
 function useDebounce(inputValue, delay) {
     const [debouncedValue, setDebouncedValue] = useState(inputValue);
@@ -28,24 +29,26 @@ const HomePage = () => {
     const debouncedSearchTerm = useDebounce(searchText, 500);
     const [titleQuery, setTitleQuery] = useState('');
 
-    const { data: comics, isLoading } = useQuery({
-        queryKey: ['comics', offset, characters, titleQuery],
-        queryFn: () => comicsServiceManager.getComics({ offset, characters, titleStartsWith: titleQuery }),
-        placeholderData: keepPreviousData,
-        refetchOnWindowFocus: false,
-        refetchOnReconnect: false,
-    });
+    // const { data: comics, isLoading } = useQuery({
+    //     queryKey: ['comics', offset, characters, titleQuery],
+    //     queryFn: () => comicsServiceManager.getComics({ offset, characters, titleStartsWith: titleQuery }),
+    //     placeholderData: keepPreviousData,
+    //     refetchOnWindowFocus: false,
+    //     refetchOnReconnect: false,
+    // });
 
-    useEffect(() => {
-        setTitleQuery(debouncedSearchTerm);
-    }, [debouncedSearchTerm]);
+    // useEffect(() => {
+    //     setTitleQuery(debouncedSearchTerm);
+    // }, [debouncedSearchTerm]);
 
-    return (
-        <Fragment>
-            <NavBar searchText={searchText} onChange={setSearchText} />
-            {!isLoading && comics ? <ComicGrid comics={comics} fetchComics={setOffset} offset={offset} /> : <Spinner />}
-        </Fragment>
-    );
+    // return (
+    //     <Fragment>
+    //         <NavBar searchText={searchText} onChange={setSearchText} />
+    //         {!isLoading && comics ? <ComicGrid comics={comics} fetchComics={setOffset} offset={offset} /> : <Spinner />}
+    //     </Fragment>
+    // );
+
+    return <CharactersList />;
 };
 
 export default HomePage;
