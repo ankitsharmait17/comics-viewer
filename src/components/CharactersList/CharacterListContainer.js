@@ -1,7 +1,14 @@
 import PropTypes from 'prop-types';
 import CharacterListItem from './CharacterListItem';
 
-export default function CharacterListContainer({ parentRef, columnVirtualizer, hasNextPage, allRows }) {
+export default function CharacterListContainer({
+    parentRef,
+    columnVirtualizer,
+    hasNextPage,
+    allRows,
+    setSelectedCharacter,
+    selectedCharacters,
+}) {
     return (
         <div
             ref={parentRef}
@@ -22,15 +29,17 @@ export default function CharacterListContainer({ parentRef, columnVirtualizer, h
                 {columnVirtualizer.getVirtualItems().map((virtualColumn) => {
                     const isLoaderRow = virtualColumn.index > allRows.length - 1;
                     const character = allRows[virtualColumn.index];
+                    const isCharacterSelected = selectedCharacters.includes(character?.id);
                     return (
                         <CharacterListItem
-                            key={character?.id}
-                            isEven={virtualColumn.index % 2}
+                            key={character?.id + virtualColumn.index}
                             start={virtualColumn.start}
                             size={virtualColumn.size}
                             character={character}
                             isLoader={isLoaderRow}
                             hasNextPage={hasNextPage}
+                            isCharacterSelected={isCharacterSelected}
+                            setSelectedCharacter={setSelectedCharacter}
                         />
                     );
                 })}
@@ -44,4 +53,6 @@ CharacterListContainer.propTypes = {
     columnVirtualizer: PropTypes.object.isRequired,
     hasNextPage: PropTypes.bool,
     allRows: PropTypes.array.isRequired,
+    setSelectedCharacter: PropTypes.func.isRequired,
+    selectedCharacters: PropTypes.array.isRequired,
 };

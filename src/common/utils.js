@@ -4,7 +4,7 @@ export function convertToQueryParams(params) {
     }
 
     const queryParams = Object.entries(params)
-        .filter(([key, value]) => value !== null && value !== '')
+        .filter(([key, value]) => value !== null && value !== '' && value?.length !== 0)
         .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
         .join('&');
 

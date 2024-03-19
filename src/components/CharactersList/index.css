@@ -1,6 +1,6 @@
 .List {
     max-width: calc(100vw - 100px);
-    margin: 50px;
+    margin: 100px 50px 50px 50px;
 }
 
 .ListItem {
