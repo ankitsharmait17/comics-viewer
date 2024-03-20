@@ -51,7 +51,21 @@ const HomePage = () => {
             <CharactersList selectedCharacters={characters} setCharacters={setCharacters} />
             {isLoading && <Spinner />}
             {!isLoading && comics && <ComicGrid comics={comics} fetchComics={setOffset} offset={offset} />}
-            {!isLoading && error && <p style={{ color: 'white' }}>An error occurred!</p>}
+            {!isLoading && error && (
+                <p
+                    style={{
+                        color: 'white',
+                        display: 'flex',
+                        height: '100vh',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '100vw',
+                        fontSize: '100px',
+                    }}
+                >
+                    An error occurred!
+                </p>
+            )}
         </Fragment>
     );
 };

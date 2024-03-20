@@ -6,34 +6,52 @@ import PaginationControl from '../PaginationControl';
 
 const ComicGrid = ({ comics, offset, fetchComics }) => {
     return (
-        <Container style={{ marginLeft: '225px', marginRight: '225px', width: 'calc(100vw - 450px)' }}>
-            <Row
-                style={{
-                    height: 'calc(100vh - 375px)',
+        <>
+            {comics.data.results.length === 0 && (
+                <span
+                    style={{
+                        color: 'white',
+                        display: 'flex',
 
-                    overflowY: 'scroll',
-                    marginTop: '75px',
-                    marginBottom: '50px',
-                }}
-            >
-                {comics.data.results.map((element, index) => (
-                    <Col lg='3' className='show-grid-col' key={element.id}>
-                        <ComicCard comic={element} key={element.id} />
+                        justifyContent: 'center',
+                        alignItems: 'center',
+
+                        fontSize: '50px',
+                    }}
+                >
+                    No comics found for the search parameters!
+                </span>
+            )}
+            <Container style={{ marginLeft: '225px', marginRight: '225px', width: 'calc(100vw - 450px)' }}>
+                <Row
+                    style={{
+                        height: 'calc(100vh - 375px)',
+
+                        overflowY: 'scroll',
+                        marginTop: '75px',
+                        marginBottom: '50px',
+                    }}
+                >
+                    {comics.data.results.length > 0 &&
+                        comics.data.results.map((element, index) => (
+                            <Col lg='3' className='show-grid-col' key={element.id}>
+                                <ComicCard comic={element} key={element.id} />
+                            </Col>
+                        ))}
+                </Row>
+                <Row>
+                    <Col />
+                    <Col>
+                        <PaginationControl
+                            currentPage={offset}
+                            totalPages={Math.ceil(comics.data.total / 20)}
+                            onPageChange={fetchComics}
+                        />
                     </Col>
-                ))}
-            </Row>
-            <Row>
-                <Col />
-                <Col>
-                    <PaginationControl
-                        currentPage={offset}
-                        totalPages={Math.ceil(comics.data.total / 20)}
-                        onPageChange={fetchComics}
-                    />
-                </Col>
-                <Col />
-            </Row>
-        </Container>
+                    <Col />
+                </Row>
+            </Container>
+        </>
     );
 };
 
