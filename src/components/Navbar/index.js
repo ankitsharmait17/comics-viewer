@@ -47,6 +47,7 @@ const NavBar = ({ searchText, onChange }) => {
                                 placeholder='Search for comics...'
                                 value={searchText}
                                 onChange={handleChange}
+                                name='search'
                             />
                             {searchText.length > 0 && (
                                 <Button style={{ backgroundColor: 'white' }} onClick={clear}>
